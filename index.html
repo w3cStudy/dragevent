@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+div{
+    width: 500px;
+    height: 500px;
+    border: 10px solid #cccccc;
+}
+    </style>
+    <script type="text/javascript">
+       /* function addHandler(element, type, handler) {
+            if (element.addEventListener){
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent){
+                element.attachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = handler;
+            }
+        }*/
+    </script>
+</head>
+<body>
+<div id="droptarget"></div>
+<span id="output"></span>
+</body>
+<script type="text/javascript">
+
+    /*droptarget.addEventListener("dragover",function (event) {
+        event.preventDefault();
+    },false)
+
+    droptarget.addEventListener("dragenter",function (evnet) {
+        evnet.preventDefault();
+    },false)*/
+    window.onload=function () {
+        var droptarget=document.getElementById("droptarget");
+        droptarget.addEventListener("dragenter",handleEvent,false);
+        droptarget.addEventListener("dragover",handleEvent,false);
+        droptarget.addEventListener("drop",handleEvent,false);
+    }
+
+    function handleEvent(event) {
+        var info='',output=document.getElementById("output"),files,i,len;
+        event.preventDefault();
+        if(event.type=='drop'){
+            files=event.dataTransfer.files;
+            i=0;
+            len=files.length;
+            while (i<len){
+                info+=files[i].name+" ("+files[i].type+" ,"+files[i].size+"Bytes)<br/>";
+                i++;
+            }
+            output.innerHTML=info;
+
+        }
+    }
+</script>
+</html>
